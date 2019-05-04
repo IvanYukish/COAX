@@ -25,11 +25,11 @@ class CarCatalog:
         with open("car_catalog", "r") as file:
             for line in file:
                 lst += line.split()
-            my_dict = dict(zip(lst[::2], lst[1::2]))
-            if my_dict.get(car) is None:
-                car_not_found(car)
-            else:
-                print('Ціна автомобіля - ', my_dict.get(car))
+        my_dict = dict(zip(lst[::2], lst[1::2]))
+        if my_dict.get(car) is None:
+            car_not_found(car)
+        else:
+            print('Ціна автомобіля - ', my_dict.get(car))
 
 
 c = CarCatalog()
