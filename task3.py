@@ -1,4 +1,21 @@
-from COAX_TESTS import parser
+from COAX_TESTS.parser import uah_to_usd, eur_to_usd
+
+
+def car_not_found(car):
+    print('Автомобіль не знайдено')
+    price = int(input('Вкажіть ціну автомобіля -'))
+    usd_prise = 0
+    currency = int(input(
+        'Вкажіть тип валюти (1 - USD, 2 - EUR , UAH - 3)'))
+    if currency == '2':
+        usd_prise = eur_to_usd(price)
+        print('ціна автомобіля в доларах = ', eur_to_usd(price))
+    elif currency == '3':
+        usd_prise = uah_to_usd(price)
+        print('ціна автомобіля в доларах = ', uah_to_usd(price))
+
+    with open("car_catalog", "w") as file:
+        file.write(f'{car} {usd_prise}')
 
 
 class CarCatalog:
@@ -9,21 +26,9 @@ class CarCatalog:
                 lst = line.split()
                 my_dict = {lst[0]: lst[1] for i in lst}
                 if my_dict.get(car) is None:
-                    self.car_not_found(car)
+                    car_not_found(car)
                 else:
-                    print(my_dict.get(car))
-
-    def car_not_found(self, car):
-        print('Автомобіль не знайдено')
-        price = input('Вкажіть ціну автомобіля -')
-        currency = int(input(
-            'Вкажіть тип валюти (1 - USD, 2 - EUR , UAH - 3)'))
-        print('ціна автомобіля в доларах = ')
-        with open("car_catalog", "w") as file:
-            file.write(f'{car} {price}')
-
-    def converter(self):
-        pass
+                    print('Ціна автомобіля - ', my_dict.get(car))
 
 
 c = CarCatalog()

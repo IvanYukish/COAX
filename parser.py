@@ -1,4 +1,5 @@
-import requests, json
+import requests
+import json
 
 
 def poloniex():
@@ -8,24 +9,21 @@ def poloniex():
     return data
 
 
-def EUR_to_USD():
+def eur_to_usd(money: int) -> float:
     polo = poloniex()
-    for i in polo[1]:
-        print(i)
-
-
-def UAH_to_USD():
-    polo = poloniex()
-    for i in polo[0]:
-        print(i[3])
-
-
-def main():
-    polo = poloniex()
+    prise_eur = prise_usd = 1
     for k in polo:
-        # if k.get('ccy')
-        print(k)
+        if k.get('ccy') == 'EUR':
+            prise_eur = k.get('buy')
+        if k.get('ccy') == 'USD':
+            prise_usd = k.get('buy')
+    return money * prise_eur / prise_usd
 
 
-if __name__ == '__main__':
-    main()
+def uah_to_usd(money: int) -> float:
+    polo = poloniex()
+    prise_usd = 1
+    for k in polo:
+        if k.get('ccy') == 'USD':
+            prise_usd = k.get('buy')
+    return money / prise_usd
