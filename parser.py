@@ -26,4 +26,4 @@ def uah_to_usd(money: int) -> float:
     for k in polo:
         if k.get('ccy') == 'USD':
             prise_usd = k.get('buy')
-    return money / prise_usd
+    return money / float(prise_usd)
